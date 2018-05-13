@@ -4,14 +4,18 @@
   "description": "Application that shows the last tweets under the #nowplaying hashtag in the same city where the user is opening the page",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node server.js",
+    "client": "(cd client && npm start)",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "express": "~4.16.0",
     "socket.io": "~2.1.0",
     "dotenv": "~5.0.1",
     "twitter": "desmondmorris/node-twitter"
+  },
+  "devDependencies": {
+    "concurrently": "~3.5.1"
   },
   "author": "Tarso Aires",
   "license": "ISC"
