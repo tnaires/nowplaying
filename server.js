@@ -1,22 +1,15 @@
 const express = require('express');
 const http = require('http');
-const socketIO = require('socket.io');
-const subscribeRouter = require('./routes/subscribe');
+
+const configSocketIO = require('./config/socketio');
+const configRoutes = require('./config/routes');
 
 const PORT = 3001;
 
 const app = express();
-app.use('/subscribe', subscribeRouter);
-
 const server = http.createServer(app);
-const io = socketIO(server);
+const io = configSocketIO(server);
 
-io.on('connection', socket => {
-  console.log('User connected');
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-});
+configRoutes(app, io);
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
