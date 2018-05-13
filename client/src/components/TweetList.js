@@ -1,10 +1,9 @@
 import React from 'react';
+import Tweet from './Tweet';
 
 const TweetList = (props) => {
   const tweetItems = props.tweets.map(tweet =>
-    <li key={tweet.id}>
-      {tweet.text}
-    </li>
+    <Tweet tweet={tweet} />
   );
 
   return (
