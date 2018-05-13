@@ -1,8 +1,11 @@
 const express = require('express');
-const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.send('Subscribed');
-});
+module.exports = (io) => {
+  const router = express.Router();
 
-module.exports = router;
+  router.get('/', (req, res, next) => {
+    res.send('Subscribed');
+  });
+
+  return router;
+};
