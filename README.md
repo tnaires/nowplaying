@@ -18,6 +18,5 @@ The application is deployed [on Heroku](https://intense-meadow-20463.herokuapp.c
 
 ## TO-DO list
 
-1. Filter videos-only tweets
 1. Post #nowplaying tweets to @BInowplaying timeline
 2. UI/UX improvements
