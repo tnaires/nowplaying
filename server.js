@@ -6,7 +6,7 @@ const http = require('http');
 const configSocketIO = require('./config/socketio');
 const configRoutes = require('./config/routes');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 const server = http.createServer(app);
