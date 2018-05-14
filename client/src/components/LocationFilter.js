@@ -21,8 +21,6 @@ class LocationFilter extends Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps.isGeolocationAvailable) {
       this.setState({ message: 'Geolocation not available in your browser.' });
-    } else if (!nextProps.isGeolocationEnabled) {
-      this.setState({ message: 'Please enable geolocation in your browser and reload the page.' });
     } else if (nextProps.coords) {
       fetch(`/geocode/reverse?latitude=${nextProps.coords.latitude}&longitude=${nextProps.coords.longitude}&result_type=${RESULT_TYPE}`)
       .then(response => {
