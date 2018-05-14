@@ -3,7 +3,8 @@ import socketIOClient from 'socket.io-client';
 import packageJson from '../../package.json';
 import TweetList from './TweetList';
 
-const TRACK = 'nowplaying';
+const TRACK = encodeURIComponent('#nowplaying');
+const QUERY = `${TRACK} ${encodeURIComponent('url:youtube')}`
 const SEARCH_RADIUS = '15km';
 const RESULT_TYPE = 'recent';
 const TWEET_COUNT = 5;
@@ -37,10 +38,11 @@ export default class TweetSubscription extends Component {
   populateRecentTweets(coordinates) {
     const geocode = `${coordinates},${SEARCH_RADIUS}`;
 
-    fetch(`/search?q=${TRACK}&geocode=${geocode}&result_type=${RESULT_TYPE}&count=${TWEET_COUNT}`)
+    fetch(`/search?q=${QUERY}&geocode=${geocode}&result_type=${RESULT_TYPE}`)
     .then(response => {
       response.json().then(data => {
-        this.addTweetsToState(data.statuses);
+        const onlyFirstOnes = data.statuses.slice(0, TWEET_COUNT);
+        this.addTweetsToState(onlyFirstOnes);
       });
     });
   }

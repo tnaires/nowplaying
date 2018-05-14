@@ -9,9 +9,8 @@ module.exports = () => {
     const q = req.query.q;
     const geocode = req.query.geocode;
     const result_type = req.query.result_type;
-    const count = req.query.count;
 
-    twitterService.standardSearch(q, geocode, result_type, count, tweets => {
+    twitterService.standardSearch(q, geocode, result_type, tweets => {
       res.send(tweets);
     });
   });

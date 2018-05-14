@@ -10,13 +10,15 @@ class TwitterService {
     });
   }
 
-  standardSearch(q, geocode, result_type, count, doneCallback) {
-    const params = { q, geocode, result_type, count };
+  standardSearch(q, geocode, result_type, doneCallback) {
+    const params = { q, geocode, result_type };
 
     this.client
       .get('search/tweets', params)
       .then(tweets => doneCallback(tweets))
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   statusesFilter(track, onNewTweetCallback) {
@@ -28,7 +30,7 @@ class TwitterService {
       });
 
       stream.on('error', error => {
-        throw error;
+        console.log(error);
       });
     });
   }
