@@ -7,6 +7,7 @@ const RESULT_TYPE = 'locality';
 class LocationFilter extends Component {
   state = {
     cityName: undefined,
+    coordinates: undefined,
     message: 'Fetching location data...'
   };
 
@@ -23,9 +24,10 @@ class LocationFilter extends Component {
       .then(response => {
         response.json().then(data => {
           const cityName = this.extractCityNameFrom(data);
+          const coordinates = [nextProps.coords.latitude, nextProps.coords.longitude].join(',');
           const message = `Fetching tweets from ${cityName}...`;
 
-          this.setState({ cityName, message });
+          this.setState({ cityName, coordinates, message });
         });
       });
     }
@@ -35,7 +37,10 @@ class LocationFilter extends Component {
     return (
       <div>
         <p>{this.state.message}</p>
-        <TweetSubscription cityName={this.state.cityName} />
+        <TweetSubscription
+          cityName={this.state.cityName}
+          coordinates={this.state.coordinates}
+        />
       </div>
     );
   }

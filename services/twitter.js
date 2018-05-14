@@ -10,6 +10,14 @@ class TwitterService {
     });
   }
 
+  standardSearch(q, geocode, result_type, count, doneCallback) {
+    const params = { q, geocode, result_type, count };
+
+    this.client
+      .get('search/tweets', params)
+      .then(tweets => doneCallback(tweets));
+  }
+
   statusesFilter(track, onNewTweetCallback) {
     const params = { track };
 
