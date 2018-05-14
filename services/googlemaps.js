@@ -15,6 +15,7 @@ class GoogleMapsService {
         doneCallback(response.json.results);
       })
       .catch(error => {
+        console.log("ERROR: reverseGeocode endpoint");
         console.log(error);
       });
   }

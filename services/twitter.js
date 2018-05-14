@@ -17,6 +17,7 @@ class TwitterService {
       .get('search/tweets', params)
       .then(tweets => doneCallback(tweets))
       .catch(error => {
+        console.log("ERROR: standardSearch endpoint");
         console.log(error);
       });
   }
@@ -30,6 +31,7 @@ class TwitterService {
       });
 
       stream.on('error', error => {
+        console.log("ERROR: statusesFilter endpoint");
         console.log(error);
       });
     });
