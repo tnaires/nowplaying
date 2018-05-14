@@ -10,8 +10,10 @@ class TwitterService {
     });
   }
 
-  openFilterStream(hashtag, onNewTweetCallback) {
-    this.client.stream('statuses/filter', {track: hashtag}, stream => {
+  statusesFilter(track, onNewTweetCallback) {
+    const params = { track };
+
+    this.client.stream('statuses/filter', params, stream => {
       stream.on('data', tweet => {
         onNewTweetCallback(tweet);
       });

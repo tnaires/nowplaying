@@ -6,7 +6,7 @@ const RESULT_TYPE = 'locality';
 
 class LocationFilter extends Component {
   state = {
-    location: undefined,
+    cityName: undefined,
     message: 'Fetching location data...'
   };
 
@@ -17,28 +17,15 @@ class LocationFilter extends Component {
       .short_name;
   }
 
-  extractLocationFrom(data) {
-    const bounds = data[0].geometry.bounds;
-    const swLng = bounds.southwest.lng;
-    const swLat = bounds.southwest.lat;
-    const neLng = bounds.northeast.lng;
-    const neLat = bounds.northeast.lat;
-
-    return `${swLng},${swLat},${neLng},${neLat}`;
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.coords) {
       fetch(`/geocode/reverse?latitude=${nextProps.coords.latitude}&longitude=${nextProps.coords.longitude}&result_type=${RESULT_TYPE}`)
       .then(response => {
         response.json().then(data => {
           const cityName = this.extractCityNameFrom(data);
-          const location = this.extractLocationFrom(data);
+          const message = `Fetching tweets from ${cityName}...`;
 
-          this.setState({
-            message: `Fetching tweets from ${cityName}...`,
-            location
-          });
+          this.setState({ cityName, message });
         });
       });
     }
@@ -48,9 +35,7 @@ class LocationFilter extends Component {
     return (
       <div>
         <p>{this.state.message}</p>
-        {this.state.location &&
-          <TweetSubscription location={this.state.location} />
-        }
+        <TweetSubscription cityName={this.state.cityName} />
       </div>
     );
   }
