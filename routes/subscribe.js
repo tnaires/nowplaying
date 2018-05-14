@@ -1,13 +1,13 @@
 const express = require('express');
-const openTweetsFilterStream = require('../services/twitter');
+const TwitterService = require('../services/twitter');
 
+const router = express.Router();
 const HASHTAG = 'nowplaying';
+const twitterService = new TwitterService();
 
 module.exports = (io) => {
-  const router = express.Router();
-
   router.get('/', (req, res, next) => {
-    openTweetsFilterStream(HASHTAG, tweet => {
+    twitterService.openFilterStream(HASHTAG, tweet => {
       io.sockets.emit(HASHTAG, tweet);
     });
 

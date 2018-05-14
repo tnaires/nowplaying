@@ -6,8 +6,9 @@ import TweetList from './TweetList';
 export default class TweetSubscription extends Component {
   state = { tweets: [] };
 
-  componentDidMount() {
+  subscribe() {
     const socket = socketIOClient(packageJson.proxy);
+
     socket.on('nowplaying', tweet => {
       this.setState(prevState => ({
         tweets: [tweet, ...prevState.tweets]
@@ -15,6 +16,11 @@ export default class TweetSubscription extends Component {
     });
 
     fetch('/subscribe');
+  }
+
+  componentDidMount() {
+    console.log(this.props.location);
+    this.subscribe();
   }
 
   render() {
