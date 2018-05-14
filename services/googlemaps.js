@@ -6,13 +6,17 @@ class GoogleMapsService {
     });
   }
 
-  async reverseGeocode(latitude, longitude, result_type) {
+  reverseGeocode(latitude, longitude, result_type, doneCallback) {
     const latlng = [latitude, longitude].join(',');
-    const response = await this.googleMapsClient
+    this.googleMapsClient
       .reverseGeocode({latlng, result_type})
-      .asPromise();
-
-    return response.json.results;
+      .asPromise()
+      .then(response => {
+        doneCallback(response.json.results);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
 

@@ -15,7 +15,8 @@ class TwitterService {
 
     this.client
       .get('search/tweets', params)
-      .then(tweets => doneCallback(tweets));
+      .then(tweets => doneCallback(tweets))
+      .catch(error => console.log(error));
   }
 
   statusesFilter(track, onNewTweetCallback) {

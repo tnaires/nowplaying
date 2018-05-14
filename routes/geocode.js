@@ -5,13 +5,14 @@ const router = express.Router();
 const googleMapsService = new GoogleMapsService();
 
 module.exports = () => {
-  router.get('/reverse', async (req, res, next) => {
+  router.get('/reverse', (req, res, next) => {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
     const result_type = req.query.result_type;
 
-    const results = await googleMapsService.reverseGeocode(latitude, longitude, result_type);
-    res.send(results);
+    googleMapsService.reverseGeocode(latitude, longitude, result_type, results => {
+      res.send(results);
+    });
   });
 
   return router;
