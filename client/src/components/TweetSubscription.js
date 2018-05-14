@@ -23,11 +23,20 @@ export default class TweetSubscription extends Component {
     return tweet.place && tweet.place.name.toLowerCase() === cityName.toLowerCase();
   }
 
+  find(urls, word) {
+    return urls.find(url => url.expanded_url.includes(word));
+  }
+
+  isVideo(tweet) {
+    const urls = tweet.entities.urls;
+    return urls && (this.find(urls, 'youtube') || this.find(urls, 'youtu.be'));
+  }
+
   subscribe() {
     const socket = socketIOClient(packageJson.proxy);
 
     socket.on('tweets', tweet => {
-      if (this.belongsToCity(tweet)) {
+      if (this.belongsToCity(tweet) && this.isVideo(tweet)) {
         this.addTweetsToState([tweet]);
       }
     });
