@@ -7,6 +7,7 @@ const twitterService = new TwitterService();
 const googleMapsService = new GoogleMapsService();
 
 const OK = 200;
+const CREATED = 201;
 const BAD_REQUEST = 400;
 
 module.exports = (io) => {
@@ -42,6 +43,16 @@ module.exports = (io) => {
 
     twitterService.standardSearch(q, geocode, result_type)
       .then(tweets => res.status(OK).send(tweets))
+      .catch(error => res.status(BAD_REQUEST));
+  });
+
+  router.post('/twitter/status', (req, res, next) => {
+    const status = req.body.status;
+    const lat = req.body.lat;
+    const long = req.body.long;
+
+    twitterService.statusesUpdate(status, lat, long)
+      .then(tweet => res.status(CREATED).send(tweet))
       .catch(error => res.status(BAD_REQUEST));
   });
 

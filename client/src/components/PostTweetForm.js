@@ -7,7 +7,33 @@ class PostTweetForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  postTweet(videoURL, comment) {
+    const params = {
+      status: `#nowplaying ${comment} ${videoURL}`,
+      lat: this.props.coordinates[0],
+      long: this.props.coordinates[1]
+    };
+
+    return fetch('/api/twitter/status', {
+      method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(params)
+    });
+  }
+
+  clearInput(input) {
+    input.value = '';
+  }
+
   handleSubmit(event) {
+    const videoURL = this.videoURLInput.value;
+    const comment = this.commentInput.value;
+
+    this.postTweet(videoURL, comment)
+      .then(response => {
+        this.clearInput(this.videoURLInput);
+        this.clearInput(this.commentInput);
+      });
     event.preventDefault();
   }
 

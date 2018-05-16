@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.json());
 
 const server = http.createServer(app);
 const io = configSocketIO(server);

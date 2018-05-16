@@ -45,7 +45,8 @@ export default class TweetSubscription extends Component {
   }
 
   populateRecentTweets(coordinates) {
-    const geocode = `${coordinates},${SEARCH_RADIUS}`;
+    const parsedCoordinates = coordinates.join(',');
+    const geocode = `${parsedCoordinates},${SEARCH_RADIUS}`;
 
     fetch(`/api/twitter/search?q=${QUERY}&geocode=${geocode}&result_type=${RESULT_TYPE}`)
     .then(response => {

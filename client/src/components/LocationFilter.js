@@ -24,7 +24,7 @@ class LocationFilter extends Component {
       .then(response => {
         response.json().then(data => {
           const cityName = this.extractCityNameFrom(data);
-          const coordinates = [nextProps.coords.latitude, nextProps.coords.longitude].join(',');
+          const coordinates = [nextProps.coords.latitude, nextProps.coords.longitude];
 
           this.setState({ cityName, coordinates });
         });
@@ -35,7 +35,10 @@ class LocationFilter extends Component {
   render() {
     return (
       <div>
-        <PostTweetForm cityName={this.state.cityName} />
+        <PostTweetForm
+          cityName={this.state.cityName}
+          coordinates={this.state.coordinates}
+        />
         <TweetSubscription
           cityName={this.state.cityName}
           coordinates={this.state.coordinates}
