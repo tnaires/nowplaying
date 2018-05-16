@@ -41,13 +41,13 @@ export default class TweetSubscription extends Component {
       }
     });
 
-    fetch(`/api/subscribe?track=${TRACK}`);
+    fetch(`/api/twitter/subscribe?track=${TRACK}`);
   }
 
   populateRecentTweets(coordinates) {
     const geocode = `${coordinates},${SEARCH_RADIUS}`;
 
-    fetch(`/api/search?q=${QUERY}&geocode=${geocode}&result_type=${RESULT_TYPE}`)
+    fetch(`/api/twitter/search?q=${QUERY}&geocode=${geocode}&result_type=${RESULT_TYPE}`)
     .then(response => {
       response.json().then(data => {
         const onlyFirstOnes = data.statuses.slice(0, TWEET_COUNT);

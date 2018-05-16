@@ -7,7 +7,7 @@ const twitterService = new TwitterService();
 const googleMapsService = new GoogleMapsService();
 
 module.exports = (io) => {
-  router.get('/subscribe', (req, res, next) => {
+  router.get('/twitter/subscribe', (req, res, next) => {
     const track = req.query.track;
 
     twitterService.statusesFilter(track, tweet => {
@@ -27,7 +27,7 @@ module.exports = (io) => {
     });
   });
 
-  router.get('/search', (req, res, next) => {
+  router.get('/twitter/search', (req, res, next) => {
     const q = req.query.q;
     const geocode = req.query.geocode;
     const result_type = req.query.result_type;
