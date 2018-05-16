@@ -10,43 +10,32 @@ class TwitterService {
     });
   }
 
-  standardSearch(q, geocode, result_type, doneCallback) {
+  standardSearch(q, geocode, result_type) {
     const params = { q, geocode, result_type };
-
-    this.client
-      .get('search/tweets', params)
-      .then(tweets => doneCallback(tweets))
-      .catch(error => {
-        console.log("ERROR: standardSearch endpoint");
-        console.log(error);
-      });
+    return this.client.get('search/tweets', params);
   }
 
-  statusesFilter(track, onNewTweetCallback) {
-    const params = { track };
+  statusesFilter(track, onNewTweetCallback, onError) {
+    return new Promise(resolve => {
+      const params = { track };
 
-    this.client.stream('statuses/filter', params, stream => {
-      stream.on('data', tweet => {
-        onNewTweetCallback(tweet);
+      this.client.stream('statuses/filter', params, stream => {
+        stream.on('data', tweet => {
+          onNewTweetCallback(tweet);
+        });
+
+        stream.on('error', error => {
+          onError(error);
+        });
       });
 
-      stream.on('error', error => {
-        console.log("ERROR: statusesFilter endpoint");
-        console.log(error);
-      });
+      resolve('Subscribed');
     });
   }
 
   statusesUpdate(status, lat, long) {
     const params = { status, lat, long };
-
-    this.client
-      .post('statuses/update', params)
-      .then(tweet => doneCallback(tweet))
-      .catch(error => {
-        console.log("ERROR: statusesUpdate endpoint");
-        console.log(error);
-      });
+    return this.client.post('statuses/update', params);
   }
 }
 

@@ -6,15 +6,23 @@ const router = express.Router();
 const twitterService = new TwitterService();
 const googleMapsService = new GoogleMapsService();
 
+const OK = 200;
+const BAD_REQUEST = 400;
+
 module.exports = (io) => {
   router.get('/twitter/subscribe', (req, res, next) => {
     const track = req.query.track;
-
-    twitterService.statusesFilter(track, tweet => {
+    const onNewTweet = tweet => {
       io.sockets.emit('tweets', tweet);
-    });
+    };
+    const onError = error => {
+      console.log("An error happened when fetching new tweet:");
+      console.log(error);
+    };
 
-    res.send('Subscribed');
+    twitterService.statusesFilter(track, onNewTweet, onError)
+      .then(result => res.status(OK).send(result))
+      .catch(error => res.status(BAD_REQUEST));
   });
 
   router.get('/geocode/reverse', (req, res, next) => {
@@ -22,9 +30,9 @@ module.exports = (io) => {
     const longitude = req.query.longitude;
     const result_type = req.query.result_type;
 
-    googleMapsService.reverseGeocode(latitude, longitude, result_type, results => {
-      res.send(results);
-    });
+    googleMapsService.reverseGeocode(latitude, longitude, result_type)
+      .then(response => res.status(OK).send(response.json.results))
+      .catch(error => res.status(BAD_REQUEST));
   });
 
   router.get('/twitter/search', (req, res, next) => {
@@ -32,9 +40,9 @@ module.exports = (io) => {
     const geocode = req.query.geocode;
     const result_type = req.query.result_type;
 
-    twitterService.standardSearch(q, geocode, result_type, tweets => {
-      res.send(tweets);
-    });
+    twitterService.standardSearch(q, geocode, result_type)
+      .then(tweets => res.status(OK).send(tweets))
+      .catch(error => res.status(BAD_REQUEST));
   });
 
   return router;
