@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Tweet = (props) => {
-  return (
-    <li key={props.tweet.id_str}>
-      {props.tweet.text}
-    </li>
-  );
-};
+class Tweet extends Component {
+  render() {
+    return (
+      <li key={this.props.tweet.id_str}>
+        {this.props.tweet.text}
+      </li>
+    );
+  }
+}
 
 export default Tweet;
