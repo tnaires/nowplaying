@@ -36,6 +36,18 @@ class TwitterService {
       });
     });
   }
+
+  statusesUpdate(status, lat, long) {
+    const params = { status, lat, long };
+
+    this.client
+      .post('statuses/update', params)
+      .then(tweet => doneCallback(tweet))
+      .catch(error => {
+        console.log("ERROR: statusesUpdate endpoint");
+        console.log(error);
+      });
+  }
 }
 
 module.exports = TwitterService;
