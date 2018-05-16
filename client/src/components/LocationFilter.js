@@ -20,7 +20,7 @@ class LocationFilter extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.coords) {
-      fetch(`/geocode/reverse?latitude=${nextProps.coords.latitude}&longitude=${nextProps.coords.longitude}&result_type=${RESULT_TYPE}`)
+      fetch(`/api/geocode/reverse?latitude=${nextProps.coords.latitude}&longitude=${nextProps.coords.longitude}&result_type=${RESULT_TYPE}`)
       .then(response => {
         response.json().then(data => {
           const cityName = this.extractCityNameFrom(data);
