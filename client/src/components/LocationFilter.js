@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { geolocated } from 'react-geolocated';
+import PostTweetForm from './PostTweetForm';
 import TweetSubscription from './TweetSubscription';
 
 const RESULT_TYPE = 'locality';
@@ -7,8 +8,7 @@ const RESULT_TYPE = 'locality';
 class LocationFilter extends Component {
   state = {
     cityName: undefined,
-    coordinates: undefined,
-    message: 'Fetching location data...'
+    coordinates: undefined
   };
 
   extractCityNameFrom(data) {
@@ -19,17 +19,14 @@ class LocationFilter extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.isGeolocationAvailable) {
-      this.setState({ message: 'Geolocation not available in your browser.' });
-    } else if (nextProps.coords) {
+    if (nextProps.coords) {
       fetch(`/geocode/reverse?latitude=${nextProps.coords.latitude}&longitude=${nextProps.coords.longitude}&result_type=${RESULT_TYPE}`)
       .then(response => {
         response.json().then(data => {
           const cityName = this.extractCityNameFrom(data);
           const coordinates = [nextProps.coords.latitude, nextProps.coords.longitude].join(',');
-          const message = `Fetching tweets from ${cityName}...`;
 
-          this.setState({ cityName, coordinates, message });
+          this.setState({ cityName, coordinates });
         });
       });
     }
@@ -38,7 +35,7 @@ class LocationFilter extends Component {
   render() {
     return (
       <div>
-        <p>{this.state.message}</p>
+        <PostTweetForm cityName={this.state.cityName} />
         <TweetSubscription
           cityName={this.state.cityName}
           coordinates={this.state.coordinates}
