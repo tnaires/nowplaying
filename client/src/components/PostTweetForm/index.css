@@ -41,3 +41,8 @@ input[type=submit] {
 .gray-border {
   border: 1px solid #c8c8c8;
 }
+
+.errors {
+  color: red;
+  padding-bottom: 1em;
+}

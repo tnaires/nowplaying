@@ -5,6 +5,7 @@ class PostTweetForm extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { showErrors: false };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -27,14 +28,20 @@ class PostTweetForm extends Component {
   }
 
   handleSubmit(event) {
-    const videoURL = this.videoURLInput.value;
-    const comment = this.commentInput.value;
+    const videoURL = this.videoURLInput.value.trim();
+    const comment = this.commentInput.value.trim();
+    const showErrors = (videoURL === '' || comment === '');
 
-    this.postTweet(videoURL, comment)
-      .then(response => {
-        this.clearInput(this.videoURLInput);
-        this.clearInput(this.commentInput);
-      });
+    this.setState({ showErrors });
+
+    if (!showErrors) {
+      this.postTweet(videoURL, comment)
+        .then(response => {
+          this.clearInput(this.videoURLInput);
+          this.clearInput(this.commentInput);
+        });
+    }
+
     event.preventDefault();
   }
 
@@ -54,6 +61,11 @@ class PostTweetForm extends Component {
           </p>
         </div>
         <form onSubmit={this.handleSubmit}>
+          {this.state.showErrors &&
+            <div className="errors">
+              Please fill both fields to post your tweet.
+            </div>
+          }
           <label>
             Video URL:
             <input
