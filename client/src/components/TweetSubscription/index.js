@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import socketIOClient from 'socket.io-client';
-import packageJson from '../../../package.json';
 import TweetList from '../TweetList';
 
 const TRACK = encodeURIComponent('#nowplaying');
@@ -33,7 +32,9 @@ export default class TweetSubscription extends Component {
   }
 
   subscribe() {
-    const socket = socketIOClient(packageJson.proxy);
+    const port = process.env.PORT || 3001;
+    const host = `http://localhost:${port}`;
+    const socket = socketIOClient(host);
 
     socket.on('tweets', tweet => {
       if (this.belongsToCity(tweet) && this.isVideo(tweet)) {
