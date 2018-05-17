@@ -4,6 +4,12 @@
 
 This application returns the most recent tweets from the user's city that contain videos and are published under the #nowplaying hashtag.
 
+## How to run the application locally
+
+You need to have [Node.js](https://nodejs.org/en/) installed on your machine.
+
+Run `npm run both` from the project root path to run the server and the client. Then open http://localhost:3000 in your browser.
+
 ## Where to access
 
 The application is deployed [on Heroku](https://intense-meadow-20463.herokuapp.com/).
