@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import socketIOClient from 'socket.io-client';
-import packageJson from '../../package.json';
-import TweetList from './TweetList';
+import packageJson from '../../../package.json';
+import TweetList from '../TweetList';
 
 const TRACK = encodeURIComponent('#nowplaying');
 const QUERY = `${TRACK} ${encodeURIComponent('url:youtube')}`

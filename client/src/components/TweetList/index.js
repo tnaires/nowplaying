@@ -1,5 +1,5 @@
 import React from 'react';
-import TweetItem from './TweetItem';
+import TweetItem from '../TweetItem';
 
 const TweetList = (props) => {
   const tweetItems = props.tweets

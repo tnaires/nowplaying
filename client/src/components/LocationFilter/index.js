@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { geolocated } from 'react-geolocated';
-import PostTweetForm from './PostTweetForm';
-import TweetSubscription from './TweetSubscription';
+import PostTweetForm from '../PostTweetForm';
+import TweetSubscription from '../TweetSubscription';
 
 const RESULT_TYPE = 'locality';
 
