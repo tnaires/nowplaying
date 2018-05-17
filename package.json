@@ -15,8 +15,7 @@
     "socket.io": "~2.1.0",
     "dotenv": "~5.0.1",
     "twitter": "desmondmorris/node-twitter",
-    "@google/maps": "~0.4.6",
-    "axios": "~0.18.0"
+    "@google/maps": "~0.4.6"
   },
   "devDependencies": {
     "concurrently": "~3.5.1"

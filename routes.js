@@ -56,13 +56,5 @@ module.exports = (io) => {
       .catch(error => res.status(BAD_REQUEST));
   });
 
-  router.get('/twitter/oembed', (req, res, next) => {
-    const url = req.query.url;
-
-    twitterService.oEmbed(url)
-      .then(data => res.status(OK).send(data.html))
-      .catch(error => res.status(BAD_REQUEST));
-  });
-
   return router;
 };

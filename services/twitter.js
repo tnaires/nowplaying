@@ -1,5 +1,4 @@
 const Twitter = require('twitter');
-const axios = require('axios');
 
 class TwitterService {
   constructor() {
@@ -37,15 +36,6 @@ class TwitterService {
   statusesUpdate(status, lat, long) {
     const params = { status, lat, long };
     return this.client.post('statuses/update', params);
-  }
-
-  async oEmbed(url) {
-    const path = `https://publish.twitter.com/oembed?url=${url}`;
-    const response = await axios.get(path);
-
-    return new Promise(resolve => {
-      resolve(response.data);
-    });
   }
 }
 
