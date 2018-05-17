@@ -69,18 +69,16 @@ class PostTweetForm extends Component {
           <label>
             Video URL:
             <input
-              className="gray-border"
+              className="url gray-border"
               type="text"
               placeholder="http://youtube.com"
-              size="30"
               ref={(input => this.videoURLInput = input)} />
           </label>
           <label>
             Comment:
             <input
-              className="gray-border"
+              className="comment gray-border"
               type="text"
-              size="60"
               ref={(input => this.commentInput = input)} />
           </label>
           <input type="submit" value="Tweet to #nowplaying" />
