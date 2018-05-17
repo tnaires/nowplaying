@@ -34,6 +34,7 @@ export default class TweetSubscription extends Component {
   subscribe() {
     const port = process.env.PORT || 3001;
     const host = `http://localhost:${port}`;
+    console.log(`Subscribing to ${host}`);
     const socket = socketIOClient(host);
 
     socket.on('tweets', tweet => {
