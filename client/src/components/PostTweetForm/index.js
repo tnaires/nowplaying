@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './index.css';
 
 class PostTweetForm extends Component {
   constructor(props) {
@@ -44,20 +45,31 @@ class PostTweetForm extends Component {
 
     return (
       <div>
-        <h1>#nowplaying in {this.props.cityName}</h1>
-        <p>
-          This page shows #nowplaying tweets in {this.props.cityName} that
-          contain a youtube link. It also allows you to post a #nowplaying
-          tweet with a YouTube link.
-        </p>
+        <div className="info">
+          <h1>#nowplaying in {this.props.cityName}</h1>
+          <p>
+            This page shows #nowplaying tweets in {this.props.cityName} that
+            contain a youtube link. It also allows you to post a #nowplaying
+            tweet with a YouTube link.
+          </p>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <label>
             Video URL:
-            <input type="text" ref={(input => this.videoURLInput = input)} />
+            <input
+              className="gray-border"
+              type="text"
+              placeholder="http://youtube.com"
+              size="30"
+              ref={(input => this.videoURLInput = input)} />
           </label>
           <label>
             Comment:
-            <input type="text" ref={(input => this.commentInput = input)} />
+            <input
+              className="gray-border"
+              type="text"
+              size="60"
+              ref={(input => this.commentInput = input)} />
           </label>
           <input type="submit" value="Tweet to #nowplaying" />
         </form>

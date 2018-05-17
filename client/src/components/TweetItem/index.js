@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tweet } from 'react-twitter-widgets';
+import './index.css';
 
 const TweetItem = (props) => {
   return (

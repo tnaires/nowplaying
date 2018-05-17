@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { geolocated } from 'react-geolocated';
 import PostTweetForm from '../PostTweetForm';
 import TweetSubscription from '../TweetSubscription';
+import './index.css';
 
 const RESULT_TYPE = 'locality';
 
@@ -34,7 +35,7 @@ class LocationFilter extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <PostTweetForm
           cityName={this.state.cityName}
           coordinates={this.state.coordinates}

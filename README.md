@@ -15,7 +15,3 @@ The application is deployed [on Heroku](https://intense-meadow-20463.herokuapp.c
 * [Express](https://expressjs.com/): I'm using Express in the back-end because I feel it's one of the most flexible servers to write APIs that I know. Also, I feel it's easy to integrate with React.
 
 * [Socket.IO](https://socket.io/): I'm using this tool specifically to integrate better with the Twitter streaming API, which I'm using to fetch realtime tweets. Through Socket.IO I can easily publish new tweets from the server to the client, as soon as I get the client subscribed to the server.
-
-## TO-DO list
-
-1. UI/UX improvements
