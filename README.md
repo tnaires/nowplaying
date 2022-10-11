@@ -10,10 +10,6 @@ You need to have [Node.js](https://nodejs.org/en/) installed on your machine.
 
 Run `npm run both` from the project root path to run the server and the client. Then open http://localhost:3000 in your browser.
 
-## Where to access
-
-The application is deployed [on Heroku](https://intense-meadow-20463.herokuapp.com/).
-
 ## Tools used
 
 * [React](https://reactjs.org/): I decided to use React mainly for two reasons: firstly, because it's one of the tools I've been trying to focus my learning efforts on lately; and secondly because it's one of the UI tools I feel most comfortable working with, taking into account what I've learned so far.
